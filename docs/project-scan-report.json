@@ -1,0 +1,70 @@
+{
+  "workflow_version": "1.2.0",
+  "timestamps": {
+    "started": "2026-03-27T15:30:00.000Z",
+    "last_updated": "2026-03-27T15:45:00.000Z",
+    "completed": "2026-03-27T15:45:00.000Z"
+  },
+  "mode": "initial_scan",
+  "scan_level": "deep",
+  "project_root": "/Users/phamthanh/Desktop/full-stack/bmad/full-stack-fastapi-template",
+  "project_knowledge": "/Users/phamthanh/Desktop/full-stack/bmad/full-stack-fastapi-template/docs",
+  "repository_type": "monorepo",
+  "project_classification": {
+    "type": "web",
+    "parts": [
+      {
+        "part_id": "backend",
+        "project_type_id": "backend",
+        "display_name": "FastAPI Backend",
+        "root_path": "backend/",
+        "primary_tech": "Python 3.10 + FastAPI + SQLModel"
+      },
+      {
+        "part_id": "frontend",
+        "project_type_id": "web",
+        "display_name": "React Frontend",
+        "root_path": "frontend/",
+        "primary_tech": "React 19 + TypeScript + Vite"
+      }
+    ]
+  },
+  "completed_steps": [
+    {"step": "step_1", "status": "completed", "timestamp": "2026-03-27T15:32:00.000Z", "summary": "Classified as monorepo with 2 parts (backend + frontend)"},
+    {"step": "step_2", "status": "completed", "timestamp": "2026-03-27T15:33:00.000Z", "summary": "Found 11 existing docs"},
+    {"step": "step_3", "status": "completed", "timestamp": "2026-03-27T15:35:00.000Z", "summary": "Tech stack: FastAPI + React on PostgreSQL"},
+    {"step": "step_4", "status": "completed", "timestamp": "2026-03-27T15:38:00.000Z", "summary": "Conditional analysis: 15 API endpoints, 2 DB tables, 40+ UI components"},
+    {"step": "step_5", "status": "completed", "timestamp": "2026-03-27T15:40:00.000Z", "summary": "Source tree documented with 20+ critical folders"},
+    {"step": "step_6", "status": "completed", "timestamp": "2026-03-27T15:42:00.000Z", "summary": "Dev/deployment guides written"},
+    {"step": "step_7", "status": "completed", "timestamp": "2026-03-27T15:43:00.000Z", "summary": "Integration architecture documented (REST API)"},
+    {"step": "step_8", "status": "completed", "timestamp": "2026-03-27T15:44:00.000Z", "summary": "Architecture docs written for 2 parts"},
+    {"step": "step_9", "status": "completed", "timestamp": "2026-03-27T15:45:00.000Z", "summary": "All supporting docs written"},
+    {"step": "step_10", "status": "completed", "timestamp": "2026-03-27T15:45:00.000Z", "summary": "Master index generated"},
+    {"step": "step_11", "status": "completed", "timestamp": "2026-03-27T15:45:00.000Z", "summary": "Validation complete"},
+    {"step": "step_12", "status": "completed", "timestamp": "2026-03-27T15:45:00.000Z", "summary": "Workflow complete"}
+  ],
+  "current_step": "completed",
+  "findings": {
+    "project_classification": "Monorepo: FastAPI backend + React frontend",
+    "technology_stack": {
+      "backend": "Python 3.10, FastAPI 0.114.2+, SQLModel, PostgreSQL 18",
+      "frontend": "React 19, TypeScript, Vite 7.3, TanStack Router/Query, Tailwind CSS 4.2"
+    }
+  },
+  "outputs_generated": [
+    "project-scan-report.json",
+    "index.md",
+    "project-overview.md",
+    "architecture-backend.md",
+    "architecture-frontend.md",
+    "source-tree-analysis.md",
+    "development-guide-backend.md",
+    "development-guide-frontend.md",
+    "deployment-guide.md",
+    "api-contracts-backend.md",
+    "data-models-backend.md",
+    "component-inventory-frontend.md",
+    "integration-architecture.md"
+  ],
+  "resume_instructions": "Workflow completed successfully"
+}

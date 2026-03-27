@@ -1,16 +1,13 @@
----
-active: true
-iteration: 3
-completion_promise: "DONE"
-initial_completion_promise: "DONE"
-started_at: "2026-03-27T09:37:33.222Z"
-session_id: "ses_2d19b5d0bffe2nXt7bFNamZllM"
-ultrawork: true
-strategy: "continue"
-message_count_at_start: 40
----
+## Prompt Install Bmad
+```
+npx bmad-method install --directory /Users/phamthanh/Desktop/full-stack/bmad/full-stack-fastapi-template --modules bmm --tools opencode --yes
+```
+
+## uwloop scan project and write context
+```
 Run full BMAD project discovery for this existing codebase without any questions.
 
 1. Execute document-project scan on the entire project.
 2. Then run bmad-generate-project-context to create project-context.md with all conventions, tech stack, and patterns.
 3. Summarize key findings at the end.
+```
