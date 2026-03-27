@@ -24,56 +24,45 @@ c:
 o:
 	npx -y opencode-ai@latest
 
-.PHONY: dev dev_d kill killbackend killfrontend redev setup install p_c k c o deploy_ssh deply_ssh u_d
+.PHONY: dev dev_d devbackend devfrontend kill killbackend killfrontend redev setup install p_c k c o deploy_ssh deply_ssh u_d
 
 # Link local khi chạy bằng các target trong file này:
-# - Backend: http://localhost:8002
-# - Frontend: http://localhost:3002
+# - Backend: http://localhost:8000
+# - Frontend: http://localhost:5173
 #
 # Link server (deploy_ssh):
-# - Backend: http://10.10.13.103:8002
-# - Frontend: http://10.10.13.103:3002 (Docker)
+# - Backend: http://10.10.13.103:8000
+# - Frontend: http://10.10.13.103:5173 (Docker)
 
-# Một shell duy nhất: job nền không bị kill khi shell recipe kết thúc; wait chờ đúng 2 tiến trình.
+# Development stack chuẩn cho project hiện tại (FastAPI + React + Docker Compose).
 dev: kill
-	@echo "Starting backend and frontend..."; \
-	(cd backend && python3 -m venv venv && ./venv/bin/pip install -r requirements.txt -q && ./venv/bin/python -m uvicorn main:app --reload --host 0.0.0.0 --port 8002) & \
-	(cd frontend && npm run dev) & \
-	echo "Backend: http://localhost:8002"; \
-	echo "Frontend: http://localhost:3002"; \
-	wait
+	docker compose watch
 
 dev_d: kill
-	@echo "Starting backend and frontend in background..."; \
-	nohup sh -c "cd backend && python3 -m venv venv && ./venv/bin/pip install -r requirements.txt -q && ./venv/bin/python -m uvicorn main:app --reload --host 0.0.0.0 --port 8002" > /tmp/dev_hub_backend.log 2>&1 & \
-	nohup sh -c "cd frontend && npm run dev -- --port 3002" > /tmp/dev_hub_frontend.log 2>&1 & \
-	echo "Backend running on :8002 (log: /tmp/dev_hub_backend.log)"; \
-	echo "Frontend running on :3002 (log: /tmp/dev_hub_frontend.log)"
+	@echo "Starting docker compose stack in background..."
+	docker compose up -d --build
 
 devbackend:
-	cd backend && python3 -m venv venv && ./venv/bin/pip install -r requirements.txt -q; ./venv/bin/python -m uvicorn main:app --reload --host 0.0.0.0 --port 8002
+	cd backend && uv sync && fastapi dev app/main.py
 
 devfrontend:
-	cd frontend && npm run dev
+	cd frontend && bun install && bun run dev
 
 kill:
-	@for p in $$(lsof -nP -iTCP:8002 -sTCP:LISTEN -t 2>/dev/null); do kill -9 $$p; done
-	@for p in $$(lsof -nP -iTCP:3002 -sTCP:LISTEN -t 2>/dev/null); do kill -9 $$p; done
+	-docker compose stop
 
 killbackend:
-	@for p in $$(lsof -nP -iTCP:8002 -sTCP:LISTEN -t 2>/dev/null); do kill -9 $$p; done
+	-docker compose stop backend
 
 killfrontend:
-	@for p in $$(lsof -nP -iTCP:3002 -sTCP:LISTEN -t 2>/dev/null); do kill -9 $$p; done
+	-docker compose stop frontend
 
 redev: kill
-	@(cd backend && python3 -m venv venv && ./venv/bin/pip install -r requirements.txt -q && ./venv/bin/python -m uvicorn main:app --reload --host 0.0.0.0 --port 8002) & \
-	(cd frontend && npm run dev) & \
-	wait
+	docker compose up --build --force-recreate
 
 setup:
-	cd backend && test -d venv || python3 -m venv venv && ./venv/bin/pip install -r requirements.txt
-	cd frontend && npm install
+	cd backend && uv sync
+	cd frontend && bun install
 
 install: setup
 
